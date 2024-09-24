@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="ma__details_desc">Back Button</string>
+    <string name="ma__home_desc">Home Button</string>
+</resources>
