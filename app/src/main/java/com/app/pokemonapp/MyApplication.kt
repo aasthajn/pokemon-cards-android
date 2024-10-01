@@ -1,4 +1,4 @@
-package com.app.movieapp
+package com.app.pokemonapp
 
 import android.app.Application
 import dagger.hilt.android.HiltAndroidApp

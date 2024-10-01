@@ -1,4 +1,4 @@
-package com.app.movieapp
+package com.app.pokemonapp
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry

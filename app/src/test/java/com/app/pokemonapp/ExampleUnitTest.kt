@@ -1,4 +1,4 @@
-package com.app.movieapp
+package com.app.pokemonapp
 
 import org.junit.Assert.assertEquals
 import org.junit.Test

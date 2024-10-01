@@ -19,7 +19,7 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "MovieApp"
+rootProject.name = "PokemonCardsApp"
 include(":app")
 include(":base:core")
 include(":core:database")

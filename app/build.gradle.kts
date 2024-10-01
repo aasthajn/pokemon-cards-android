@@ -7,11 +7,11 @@ plugins {
 }
 
 android {
-    namespace = "com.app.movieapp"
+    namespace = "com.app.pokemonapp"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.app.movieapp"
+        applicationId = "com.app.pokemonapp"
         minSdk = 24
         targetSdk = 34
         versionCode = 1

@@ -1,4 +1,4 @@
-package com.app.movieapp
+package com.app.pokemonapp
 
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
