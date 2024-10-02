@@ -25,3 +25,6 @@ local.properties
 /feature/home/data/.gitignore
 /feature/home/domain/.gitignore
 /feature/home/.gitignore
+/feature/common/data/.gitignore
+/feature/common/domain/.gitignore
+

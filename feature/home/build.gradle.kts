@@ -61,7 +61,7 @@ dependencies {
 
     implementation(project(":base:di"))
     implementation(project(":base:core"))
-    implementation(project(":feature:domain"))
+    implementation(project(":feature:common:domain"))
     implementation(project(":base:ui"))
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)

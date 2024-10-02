@@ -3,10 +3,11 @@ plugins {
     alias(libs.plugins.jetbrainsKotlinAndroid)
     alias(libs.plugins.hilt)
     alias(libs.plugins.kapt)
+    alias(libs.plugins.ksp)
 }
 
 android {
-    namespace = "com.app.detail"
+    namespace = "com.app.data"
     compileSdk = 34
 
     defaultConfig {
@@ -32,15 +33,7 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
-    buildFeatures {
-        compose = true
-    }
-    composeOptions {
-        kotlinCompilerExtensionVersion = "1.4.0"
-    }
-    kotlinOptions {
-        jvmTarget = "1.8"
-    }
+
     packaging {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
@@ -59,34 +52,24 @@ android {
 
 dependencies {
 
-    implementation(project(":base:di"))
     implementation(project(":base:core"))
     implementation(project(":feature:common:domain"))
-    implementation(project(":base:ui"))
-
+    implementation(project(":base:database"))
+    implementation(project(":base:di"))
+    implementation(project(":base:network"))
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
-
+    implementation(libs.material)
     implementation(libs.hilt.android)
-    implementation(libs.androidx.hilt.navigation.compose)
     implementation(libs.engage.core)
     kapt(libs.hilt.compiler)
-
-    implementation(platform(libs.androidx.compose.bom))
-    implementation(libs.androidx.ui)
-    implementation(libs.androidx.ui.graphics)
-    implementation(libs.androidx.ui.tooling.preview)
-    implementation(libs.androidx.material3)
-    implementation(libs.androidx.compose.material)
-
-    implementation(libs.androidx.lifecycle.runtimeCompose)
-    implementation(libs.androidx.lifecycle.viewModelCompose)
-    implementation(libs.androidx.navigation.compose)
-
-    implementation(libs.coil)
-    implementation(libs.coil.compose)
-
+    implementation(libs.material)
+    implementation(libs.retrofit.convertor.gson)
+    implementation(libs.androidx.room.runtime)
+    implementation(libs.androidx.room.ktx)
+    ksp(libs.androidx.room.compiler)
     testImplementation(libs.junit)
+
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 }

@@ -68,7 +68,7 @@ dependencies {
 
     implementation(project(":feature:home"))
     implementation(project(":feature:detail"))
-    implementation(project(":feature:data"))
+    implementation(project(":feature:common:data"))
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)

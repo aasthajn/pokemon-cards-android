@@ -46,6 +46,7 @@ core-testing = "2.1.0"
 kotlinx-coroutines-test = "1.6.1"
 turbine = "0.11.0"
 annotation = "1.8.0"
+jetbrainsKotlinJvm = "1.8.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -117,4 +118,5 @@ ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 googleServices = { id = "com.google.gms.google-services", version.ref = "googleServices" }
 android-library = { id = "com.android.library", version.ref = "agp" }
 androidDynamicFeature = { id = "com.android.dynamic-feature", version.ref = "agp" }
+jetbrainsKotlinJvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "jetbrainsKotlinJvm" }
 
