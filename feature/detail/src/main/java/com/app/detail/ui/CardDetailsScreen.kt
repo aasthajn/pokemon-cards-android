@@ -17,8 +17,11 @@ import coil.request.CachePolicy
 import coil.request.ImageRequest
 import com.app.detail.presentation.CardDetailUiState
 import com.app.detail.presentation.CardDetailViewModel
+import com.app.ui.ErrorMessage
 import com.app.ui.ErrorUI
 import com.app.ui.LoaderUI
+import com.app.ui.Message
+import com.app.ui.ShimmerEffect
 import com.app.ui.TopBar
 
 @Composable
@@ -31,36 +34,34 @@ internal fun CardDetailsScreen(onNavigateBack: () -> Unit) {
         val contentModifier = Modifier.padding(it)
         val viewModel = hiltViewModel<CardDetailViewModel>()
         val cardUiState = viewModel.cardDetails.collectAsStateWithLifecycle().value
+        val modifier = contentModifier
+            .fillMaxSize()
         Box(
-            modifier = contentModifier
-                .fillMaxSize(),
+           modifier,
             contentAlignment = Alignment.Center
         ) {
-            CardDetails(cardUiState)
+            CardDetails(modifier,cardUiState)
         }
     }
 }
 
 @Composable
-internal fun CardDetails(uiState: CardDetailUiState) {
+internal fun CardDetails(modifier: Modifier,uiState: CardDetailUiState) {
     when (uiState) {
-        is CardDetailUiState.Error -> ErrorUI(message = uiState.message)
-        is CardDetailUiState.Init -> ErrorUI(message = "Initialising")
-        is CardDetailUiState.Loading -> LoaderUI()
+        is CardDetailUiState.Error -> Message(message = uiState.message,modifier)
+        is CardDetailUiState.Init -> Message(message = "Initialising")
+        is CardDetailUiState.Loading -> ShimmerEffect()
         is CardDetailUiState.Success -> {
-
             val loading = rememberAsyncImagePainter(LoaderUI())
             AsyncImage(
                 model = ImageRequest.Builder(LocalContext.current)
                     .data(uiState.cardData.image)
                     .diskCacheKey(uiState.cardData.image)
-                    .memoryCachePolicy(CachePolicy.ENABLED)
-                    .diskCachePolicy(CachePolicy.ENABLED)
                     .crossfade(true)
                     .build(),
                 contentDescription = null,
                 placeholder = loading,
-                contentScale = ContentScale.Fit,
+                contentScale = ContentScale.FillBounds,
             )
 
         }

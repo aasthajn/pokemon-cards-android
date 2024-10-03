@@ -21,7 +21,6 @@ import coil.compose.AsyncImage
 import com.app.domain.model.CardData
 import com.app.home.presentation.CardListUiState
 import com.app.ui.ErrorMessage
-import com.app.ui.ErrorUI
 import com.app.ui.Message
 import com.app.ui.ShimmerEffect
 

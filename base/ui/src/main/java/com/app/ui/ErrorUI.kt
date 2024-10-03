@@ -20,7 +20,6 @@ import androidx.compose.ui.unit.dp
 fun ErrorUI(message: String) {
     Message(
         message = message, Modifier
-            .fillMaxSize()
             .wrapContentSize(Alignment.Center)
     )
 }
@@ -36,7 +35,7 @@ fun Message(message: String, modifier: Modifier = Modifier) {
             text = message,
             color = MaterialTheme.colorScheme.primary,
             textAlign = TextAlign.Center,
-            modifier = Modifier.weight(1f),
+            modifier = modifier.weight(1f),
             maxLines = 2
         )
     }
