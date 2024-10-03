@@ -16,11 +16,9 @@ import javax.inject.Inject
 class CardDetailViewModel @Inject constructor(
     private val cardDetailUseCase: GetCardDetailUseCase,
     savedStateHandle: SavedStateHandle
-) :
-    ViewModel() {
+) : ViewModel() {
 
-
-    val cardId = savedStateHandle[cardIdArg] ?: "dp3-1"
+    private val cardId = savedStateHandle[cardIdArg] ?: "dp3-1"
 
     private val _mutableCardDetails = MutableStateFlow<CardDetailUiState>(CardDetailUiState.Init)
 
@@ -32,12 +30,10 @@ class CardDetailViewModel @Inject constructor(
 
     private fun getCardDetails() {
         viewModelScope.launch {
-            _mutableCardDetails.value = CardDetailUiState.Loading
             cardDetailUseCase(cardId).collect {
                 when (it) {
                     is DataState.Success -> {
                         _mutableCardDetails.value = CardDetailUiState.Success(it.result)
-                        //Timber.e(" data ${it.data.totalPages}")
                     }
 
                     is DataState.Error -> {

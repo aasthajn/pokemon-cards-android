@@ -20,7 +20,7 @@ internal class HomeViewModel @Inject constructor(private val cardListUseCase: Ge
         getCardData()
     }
 
-    private fun getCardData() {
+    fun getCardData() {
         _mutableCardsState.value = CardListUiState.Loading
         viewModelScope.launch {
             _mutableCardsState.value = CardListUiState.Loading

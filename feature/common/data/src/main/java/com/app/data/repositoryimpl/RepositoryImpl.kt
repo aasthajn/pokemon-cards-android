@@ -10,6 +10,7 @@ import com.app.data.datasource.mapper.RemoteToDomainMapper
 import com.app.data.datasource.mapper.RemoteToLocalMapper
 import com.app.data.datasource.remote.RemoteDataSource
 import com.app.di.IoDispatcher
+import com.app.domain.model.CardData
 import com.app.domain.repository.Repository
 import com.app.network.APIResponseHandler.resolveError
 import kotlinx.coroutines.CoroutineDispatcher
@@ -30,43 +31,39 @@ class RepositoryImpl @Inject constructor(
 ) : Repository {
 
     override suspend fun getTrendingCards() = flow {
-
-        localDataSource.getTrendingCards()?.let { cardDbList ->
-            emit(DataState.Success(cardDbList.map { localToDomainMapper.map(it) }))
-        }
         try {
+           // kotlinx.coroutines.delay(500)
             emit(DataState.Loading)
             val result = remoteDataSource.getTrendingCards().cards
-            Log.d("Aastha success", result.toString())
-            emit(DataState.Success(result.map { it ->
-                remoteToDomainMapper.map(it)
-            }))
-            localDataSource.delete()
-            localDataSource.insertCards(result.map { remoteToLocalMapper.map(it) })
+            if(result.isNotEmpty()){
+                emit(DataState.Success(result.map {
+                    remoteToDomainMapper.map(it)
+                }))
+                localDataSource.delete()
+                localDataSource.insertCards(result.map { remoteToLocalMapper.map(it) })
+            }
         } catch (exception: Exception) {
-            Log.d("Aastha error", exception.toString())
             emit(resolveError(exception))
             localDataSource.getTrendingCards()?.let { cardDbList ->
-                emit(DataState.Success(cardDbList.map { localToDomainMapper.map(it) }))
+                if(cardDbList.isNotEmpty()){
+                    emit(DataState.Success(cardDbList.map { localToDomainMapper.map(it) }))
+                }
+            }
+        }}.flowOn(ioDispatcher)
+
+
+    override suspend fun getCardDetails(id: String) = flow {
+        try {
+            emit(DataState.Loading)
+            val result = remoteDataSource.getCardDetails(id)
+            emit(DataState.Success(cardDetailsRemoteToDomainMapper.map(result.cardDetails)))
+            localDataSource.insertCard(cardDetailsRemoteToLocalMapper.map(result.cardDetails))
+        } catch (exception: Exception) {
+            emit(resolveError(exception))
+            localDataSource.getCardDetails(id)?.let { cardDBEntity->
+                emit(DataState.Success(localToDomainMapper.map(cardDBEntity)))
             }
         }
     }.flowOn(ioDispatcher)
 
-    override suspend fun getCardDetails(id: String) = flow {
-        emit(DataState.Loading)
-        localDataSource.getCardDetails(id)?.let {
-            emit(DataState.Success(localToDomainMapper.map(it)))
-        } ?: run {
-            try {
-                val result = remoteDataSource.getCardDetails(id)
-                emit(DataState.Success(cardDetailsRemoteToDomainMapper.map(result.cardDetails)))
-                localDataSource.insertCard(cardDetailsRemoteToLocalMapper.map(result.cardDetails))
-            } catch (e: Exception) {
-                emit(resolveError(e))
-                localDataSource.getCardDetails(id)?.let {
-                    emit(DataState.Success(localToDomainMapper.map(it)))
-                }
-            }
-        }
-    }.flowOn(ioDispatcher)
 }

@@ -2,4 +2,5 @@
 <resources>
     <string name="ma__details_desc">Back Button</string>
     <string name="ma__home_desc">Home Button</string>
+    <string name="pg__retry">Retry</string>
 </resources>

@@ -20,7 +20,9 @@ internal fun HomeScreen(onNavigateToCard: (String) -> Unit) {
         val viewModel = hiltViewModel<HomeViewModel>()
         val cardList =
             viewModel.cardsUI.collectAsStateWithLifecycle().value
-        HomeUI(contentModifier, cardList, onSelected = onNavigateToCard)
+        HomeUI(contentModifier, cardList, onSelected = onNavigateToCard){
+            viewModel.getCardData()
+        }
     }
 }
 
