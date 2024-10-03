@@ -58,12 +58,10 @@ dependencies {
     implementation(project(":base:di"))
     implementation(project(":base:network"))
     implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.appcompat)
-    implementation(libs.material)
     implementation(libs.hilt.android)
     implementation(libs.engage.core)
     kapt(libs.hilt.compiler)
-    implementation(libs.material)
+
     implementation(libs.retrofit.convertor.gson)
     implementation(libs.androidx.room.runtime)
     implementation(libs.androidx.room.ktx)

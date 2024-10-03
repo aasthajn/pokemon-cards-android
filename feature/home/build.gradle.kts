@@ -59,12 +59,10 @@ android {
 
 dependencies {
 
-    implementation(project(":base:di"))
     implementation(project(":base:core"))
     implementation(project(":feature:common:domain"))
     implementation(project(":base:ui"))
     implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.appcompat)
     implementation(libs.hilt.android)
     implementation(libs.androidx.hilt.navigation.compose)
     implementation(libs.engage.core)

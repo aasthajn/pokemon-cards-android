@@ -48,9 +48,6 @@ dependencies {
 
     implementation(project(":base:core"))
     implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.appcompat)
-    implementation(libs.material)
-
     implementation(libs.hilt.android)
     implementation(libs.engage.core)
     kapt(libs.hilt.compiler)
