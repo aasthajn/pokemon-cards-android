@@ -1,4 +1,4 @@
-Basic Modular Android App which loads Pokemon cards from REST API
+Modular Android App which loads Pokemon cards from REST API
 Tech Stack : 
 Jetpack Compose
 Kotlin
